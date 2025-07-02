@@ -14,7 +14,8 @@ app.use(express.urlencoded({ extended: true }));
 mongoose
   .connect(
     "mongodb+srv://lileshpatil38:CekPCYuGBQHg3gzN@cluster0.bxuwb04.mongodb.net/",
-    { useNewUrlParser: true, useUnifiedTopology: true }
+    { useNewUrlParser: true, useUnifiedTopology: true, ssl: true,
+      tlsInsecure: false }
   )
   .then(console.log("Connected"));
 
