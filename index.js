@@ -4,6 +4,8 @@ const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const cors = require("cors");
+require("dotenv").config();
+const PORT = process.env.PORT || 8080;
 
 app.use(cors("*"));
 app.use(express.json());
@@ -11,7 +13,8 @@ app.use(express.urlencoded({ extended: true }));
 
 mongoose
   .connect(
-    "mongodb+srv://lileshpatil38:CekPCYuGBQHg3gzN@cluster0.bxuwb04.mongodb.net/"
+    "mongodb+srv://lileshpatil38:CekPCYuGBQHg3gzN@cluster0.bxuwb04.mongodb.net/",
+    { useNewUrlParser: true, useUnifiedTopology: true }
   )
   .then(console.log("Connected"));
 
@@ -43,7 +46,7 @@ const authMiddleware = (req, res, next) => {
   }
 };
 
-app.listen(8080, (req, res) => {
+app.listen(PORT, (req, res) => {
   console.log("Listening");
 });
 
@@ -91,8 +94,8 @@ app.patch("/task/:id/status", authMiddleware, async (req, res) => {
     { status },
     { new: true }
   );
-  if(!task) return res.status(404).json({message:"Task not found"});
-  res.json({task});
+  if (!task) return res.status(404).json({ message: "Task not found" });
+  res.json({ task });
 });
 
 // Update Priority
@@ -103,8 +106,6 @@ app.patch("/task/:id/priority", authMiddleware, async (req, res) => {
     { priority },
     { new: true }
   );
-  if(!task) return res.status(404).json({message:"Task not found"});
-  res.json({task});
+  if (!task) return res.status(404).json({ message: "Task not found" });
+  res.json({ task });
 });
-
-
