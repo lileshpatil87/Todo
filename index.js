@@ -5,6 +5,8 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const cors = require("cors");
 require("dotenv").config();
+
+const MONGO = process.env.MONGOURL;
 const PORT = process.env.PORT || 8080;
 
 app.use(cors("*"));
@@ -13,7 +15,7 @@ app.use(express.urlencoded({ extended: true }));
 
 mongoose
   .connect(
-    "mongodb+srv://lileshpatil38:CekPCYuGBQHg3gzN@cluster0.bxuwb04.mongodb.net/",
+    MONGO,
     { useNewUrlParser: true, useUnifiedTopology: true, ssl: true,
       tlsInsecure: false }
   )
